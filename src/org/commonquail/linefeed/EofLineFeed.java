@@ -2,10 +2,12 @@ package org.commonquail.linefeed;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import org.netbeans.api.annotations.common.NonNull;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;
 import org.netbeans.spi.editor.document.OnSaveTask;
+import org.openide.util.Exceptions;
 
 public final class EofLineFeed implements OnSaveTask {
 
@@ -29,19 +31,31 @@ public final class EofLineFeed implements OnSaveTask {
 
     @Override
     public void performTask() {
-        logger.log(Level.INFO, "EofLineFeed.performTask()");
-        logger.log(Level.INFO, "Document: {0}", document);
+        if (document == null) {
+            return;
+        }
+
+        try {
+            int length = document.getLength();
+
+            if (length == 0) {
+                document.insertString(0, LF, null);
+            } else if (!document.getText(length - 1, 1).equals(LF)) {
+                document.insertString(length, LF, null);
+            }
+        } catch (BadLocationException ex) {
+            Exceptions.printStackTrace(ex);
+            logger.log(Level.SEVERE, ex.getMessage());
+        }
     }
 
     @Override
     public void runLocked(@NonNull Runnable run) {
-        logger.log(Level.INFO, "EofLineFeed.runLocked()");
         run.run();
     }
 
     @Override
     public boolean cancel() {
-        logger.log(Level.INFO, "EofLineFeed.cancel()");
         return false;
     }
 
@@ -53,5 +67,4 @@ public final class EofLineFeed implements OnSaveTask {
             return new EofLineFeed(context.getDocument());
         }
     }
-
 }
