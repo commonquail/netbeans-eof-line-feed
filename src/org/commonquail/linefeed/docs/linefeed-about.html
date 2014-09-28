@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>About EOF Line Feed</title>
+        <link rel="stylesheet" href="nbdocs://org.netbeans.modules.usersguide/org/netbeans/modules/usersguide/ide.css" type="text/css">
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h2>About EOF Line Feed</h2>
+        <p>The <em>EOF Line Feed</em> plugin appends a line feed character (\n)
+            to the end of every document when saved, unless the document is
+            already terminated by a line feed.</p>
+        <h3>Motivation</h3>
+        <p>A number of tools expect text files to end with a line feed
+            character. NetBeans allows the cursor to occupy and modify,
+            including delete, the last line in a text file, and will then not
+            ensure that the file is terminated by a line feed.
+        </p>
+        <h3>Goals</h3>
+        <p>The goal of this plugin is to ensure that all text files are
+            terminated by a line feed. It is not to provide the ability to
+            specify rules or otherwise adjust this behaviour. If you regularly
+            edit files that should <em>not</em> be terminated by a line feed you
+            probably should not be using this plugin.
+    </body>
+</html>
