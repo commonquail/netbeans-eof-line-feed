@@ -21,10 +21,20 @@ public final class EofLineFeed implements OnSaveTask {
 
     private final Document document;
 
+    /**
+     * Creates a no-op EOF line-feed guarantee.
+     */
     public EofLineFeed() {
         this(null);
     }
 
+    /**
+     * Creates a new EOF line-feed guarantee for the given document.
+     *
+     * If document is null the class' task becomes a no-op.
+     *
+     * @param document The document to process.
+     */
     public EofLineFeed(Document document) {
         this.document = document;
     }
