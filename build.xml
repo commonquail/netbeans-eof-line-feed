@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="org.commonquail.linefeed" default="netbeans" basedir=".">
-    <description>Builds, tests, and runs the project org.commonquail.linefeed.</description>
-    <import file="nbproject/build-impl.xml"/>
-</project>
