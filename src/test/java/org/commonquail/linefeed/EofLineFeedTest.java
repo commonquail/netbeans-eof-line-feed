@@ -108,34 +108,26 @@ public class EofLineFeedTest extends NbTestCase {
     @Test
     public void testCanRunUnderLockWhenDefaultConstructed() {
         EofLineFeed instance = new EofLineFeed();
-        final Runnable run = new Runnable() {
-            @Override
-            public void run() {
-            }
-        };
-        instance.runLocked(run);
+        instance.runLocked(EofLineFeedTest::noop);
     }
 
     @Test
     public void testCanRunUnderLockWhenNotDefaultConstructed() {
         EofLineFeed instance = new EofLineFeed(createNewDocument());
-        final Runnable run = new Runnable() {
-            @Override
-            public void run() {
-            }
-        };
-        instance.runLocked(run);
+        instance.runLocked(EofLineFeedTest::noop);
     }
 
     @Test
     public void testCanNotCancelTask() {
         EofLineFeed instance = new EofLineFeed(createNewDocument());
-        boolean expResult = false;
         boolean result = instance.cancel();
-        assertEquals(expResult, result);
+        assertFalse(result);
     }
 
-    private Document createNewDocument() {
+    private static Document createNewDocument() {
         return new NbEditorDocument("text/plain");
+    }
+
+    private static void noop() {
     }
 }
