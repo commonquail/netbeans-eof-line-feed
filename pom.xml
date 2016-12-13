@@ -7,7 +7,7 @@
 
   <groupId>org.commonquail</groupId>
   <artifactId>org.commonquail.linefeed</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>nbm</packaging>
 
   <name>EOF Line Feed</name>
