@@ -1,0 +1,186 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  >
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.commonquail</groupId>
+  <artifactId>org.commonquail.linefeed</artifactId>
+  <version>1.0</version>
+  <packaging>nbm</packaging>
+
+  <name>EOF Line Feed</name>
+  <url>http://plugins.netbeans.org/plugin/56323/eof-line-feed</url>
+  <description>Appends a line feed to text files that are not already terminated by a line feed during saving.</description>
+
+  <scm>
+    <url>https://github.com/commonquail/netbeans-eof-line-feed</url>
+    <connection>scm:git:git://github.com/commonquail/netbeans-eof-line-feed.git</connection>
+    <developerConnection>scm:git:git@github.com:commonquail/netbeans-eof-line-feed.git</developerConnection>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/commonquail/netbeans-eof-line-feed/issues</url>
+  </issueManagement>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <netbeans.version>RELEASE82</netbeans.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>netbeans</id>
+      <name>NetBeans</name>
+      <url>http://bits.netbeans.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <build>
+    <finalName>org-commonquail-netbeans-eof-linefeed-${project.version}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>nbm-maven-plugin</artifactId>
+        <version>4.1</version>
+        <extensions>true</extensions>
+        <configuration>
+          <!-- ID for plugin updates. -->
+          <codeNameBase>org.commonquail.linefeed</codeNameBase>
+          <author>Mikkel Kjeldsen</author>
+          <keystore>nbproject/private/keystore</keystore>
+          <keystorealias>myself</keystorealias>
+          <licenseName>MIT</licenseName>
+          <licenseFile>LICENSE.TXT</licenseFile>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19</version>
+        <configuration>
+          <argLine>-Djava.endorsed.dirs=${endorsed.dir}</argLine>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+          <!-- So the jar plugin picks up the nbm-generated manifest. -->
+          <archive>
+            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.8</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-api-annotations-common</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-editor-lib2</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-editor-mimelookup</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-javahelp</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-parsing-api</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-projectapi</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-projectuiapi</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-filesystems</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-util</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-util-lookup</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+
+    <!-- Testing. -->
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-libs-junit4</artifactId>
+      <version>${netbeans.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-nbjunit</artifactId>
+      <version>${netbeans.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-editor</artifactId>
+      <version>${netbeans.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+</project>
